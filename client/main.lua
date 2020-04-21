@@ -397,7 +397,7 @@ AddEventHandler("ZombieSync", function()
 			end
 
 			table.insert(entitys, entity)
-			Citizen.Trace("Zombie Spawned\n")
+			--Citizen.Trace("Zombie Spawned\n")
 		end	
 
 		for i, entity in pairs(entitys) do
@@ -412,7 +412,7 @@ AddEventHandler("ZombieSync", function()
 					local model = GetEntityModel(entity)
 					SetEntityAsNoLongerNeeded(entity)
 					SetModelAsNoLongerNeeded(model)
-					Citizen.Trace("Zombie Eliminated\n")
+					--Citizen.Trace("Zombie Eliminated\n")
 					table.remove(entitys, i)
 				end
 			end
@@ -555,7 +555,7 @@ AddEventHandler('esx_zombiesystem:clear', function()
 		SetEntityAsNoLongerNeeded(entity)
 		SetModelAsNoLongerNeeded(model)
 		table.remove(entitys, i)
-		Citizen.Trace("Zombie Eliminated\n")
+		--Citizen.Trace("Zombie Eliminated\n")
 	end
 end)
 
