@@ -301,7 +301,7 @@ local Models = {
 	"IG_Talina",
 	"IG_Tanisha"
 }
--------------------[WALK STYLE PEDS]-------------------
+
 local walks = {
 	"move_m@drunk@verydrunk",
 	"move_m@drunk@moderatedrunk",
@@ -309,9 +309,6 @@ local walks = {
 	"anim_group_move_ballistic",
 	"move_lester_CaneUp",
 }
-
-
----------------------------------------------------------------------------------------------
 
 players = {}
 
@@ -432,7 +429,6 @@ AddEventHandler("ZombieSync", function()
 	end
 end)
 
-
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(1)
@@ -473,7 +469,6 @@ end
 
 SetBlackout(Config.Blackout)
 
---loot
 if Config.ZombieDropLoot then
 	Citizen.CreateThread(function()
 		while true do
