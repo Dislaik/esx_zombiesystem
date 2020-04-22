@@ -5,6 +5,7 @@ This is a zombie system, complemented with ESX
 * Follow the closest player
 * Hordes
 * Zombie attack proximity
+* Safe Zones
 
 ## How install
 1. Download the github repository
