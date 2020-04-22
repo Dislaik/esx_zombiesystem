@@ -496,6 +496,7 @@ if Config.ZombieDropLoot then
 											
 										randomChance = math.random(1, 100)
 										randomLoot = Config.WeaponLoot[math.random(1, #Config.WeaponLoot)]
+										randomItem = Config.ItemLoot[math.random(1, #Config.ItemLoot)]
 
 										Citizen.Wait(2000)
 										if randomChance > 0 and randomChance < Config.ProbabilityWeaponLoot then
@@ -504,7 +505,9 @@ if Config.ZombieDropLoot then
 											exports.pNotify:SendNotification({text = 'You found ' .. randomLoot, type = "success", timeout = 2500, layout = "centerRight", queue = "right"})
 										elseif randomChance >= Config.ProbabilityWeaponLoot and randomChance < Config.ProbabilityMoneyLoot then
 											TriggerServerEvent('esx_zombiesystem:moneyloot')
-										elseif randomChance >= Config.ProbabilityMoneyLoot and randomChance < 100 then
+										elseif randomChance >= Config.ProbabilityMoneyLoot and randomChance < Config.ProbabilityItemLoot then
+											TriggerServerEvent('esx_zombiesystem:itemloot', randomItem)
+										elseif randomChance >= Config.ProbabilityItemLoot and randomChance < 100 then
 											exports.pNotify:SendNotification({text = 'You not found nothing', type = "error", timeout = 2500, layout = "centerRight", queue = "right"})
 										end
 										ClearPedSecondaryTask(GetPlayerPed(-1))
@@ -524,24 +527,28 @@ if Config.ZombieDropLoot then
 end
 
 if Config.SafeZoneRadioBlip then
-	blip = AddBlipForRadius(Config.SafeZoneCoords.x, Config.SafeZoneCoords.y, Config.SafeZoneCoords.z, Config.SafeZoneCoords.radio)
-	SetBlipHighDetail(blip, true)
-	SetBlipColour(blip, 2)
-	SetBlipAlpha (blip, 128)
+	for k, v in pairs(Config.SafeZoneCoords) do
+		blip = AddBlipForRadius(v.x, v.y, v.z, v.radio)
+		SetBlipHighDetail(blip, true)
+		SetBlipColour(blip, 2)
+		SetBlipAlpha (blip, 128)
+	end
 end
 
 if Config.SafeZone then
 	Citizen.CreateThread(function()
 		while true do
 			Citizen.Wait(1)
-			for i, entity in pairs(entitys) do
-				pedX, pedY, pedZ = table.unpack(GetEntityCoords(entity, true))
-				if(Vdist(pedX, pedY, pedZ, Config.SafeZoneCoords.x, Config.SafeZoneCoords.y, Config.SafeZoneCoords.z) < Config.SafeZoneCoords.radio)then
-					Citizen.Trace("Zombie Eliminated from refuge\n")
-					SetEntityHealth(entity, 0)
-					SetEntityAsNoLongerNeeded(entity)
-					DeleteEntity(entity)
-					table.remove(entitys, i)
+			for k, v in pairs(Config.SafeZoneCoords) do
+				for i, entity in pairs(entitys) do
+					pedX, pedY, pedZ = table.unpack(GetEntityCoords(entity, true))
+					if(Vdist(pedX, pedY, pedZ, v.x, v.y, v.z) < v.radio)then
+						--Citizen.Trace("Zombie Eliminated from refuge\n")
+						SetEntityHealth(entity, 0)
+						SetEntityAsNoLongerNeeded(entity)
+						DeleteEntity(entity)
+						table.remove(entitys, i)
+					end
 				end
 			end
 		end
