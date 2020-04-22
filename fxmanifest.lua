@@ -3,7 +3,7 @@ games { 'gta5' }
 
 author 'Dislaik'
 description 'Zombie System for ESX Framework'
-version '1.0.0'
+version '1.2.0'
 
 -- What to run
 client_scripts {
