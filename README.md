@@ -1,6 +1,6 @@
 # esx_zombiesystem
 This is a zombie system, complemented with ESX
-* Loot from zombies
+* Loot from zombies (Weapons, items and money)
 * Loot probability
 * Follow the closest player
 * Hordes
