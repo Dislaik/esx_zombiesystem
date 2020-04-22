@@ -28,6 +28,14 @@ AddEventHandler('esx_zombiesystem:moneyloot', function()
 	TriggerClientEvent("pNotify:SendNotification", xPlayer.source, {text = "You found $" .. random .. " dolars", type = "success", timeout = 2500, layout = "centerRight", queue = "right"})
 end)
 
+RegisterServerEvent('esx_zombiesystem:itemloot')
+AddEventHandler('esx_zombiesystem:itemloot', function(item)
+    local xPlayer = ESX.GetPlayerFromId(source)
+	local random = math.random(1, 5)
+    xPlayer.addInventoryItem(item, random)
+    TriggerClientEvent("pNotify:SendNotification", xPlayer.source, {text = "You found " .. random .. " " .. item, type = "success", timeout = 2500, layout = "centerRight", queue = "right"})
+end)
+
 entitys = {}
 
 RegisterServerEvent("RegisterNewZombie")
