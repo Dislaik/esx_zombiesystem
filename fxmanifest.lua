@@ -9,8 +9,12 @@ client_scripts {
 	'config.lua',
 	'client/main.lua',
 	'client/loot.lua'
-
 }
+
 server_script {
 	'server/main.lua'
+}
+
+dependencies {
+	'mythic_progbar'
 }
