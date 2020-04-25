@@ -15,7 +15,7 @@ This is a zombie system, complemented with ESX
 4. Configure to your liking
 
 ## Dependecy
-* [pNotify](https://github.com/Nick78111/pNotify)
+* [mythic_progbar](https://github.com/JayMontana36/mythic_progbar)
 
 ## Screenshots
 ![Image description](https://i.imgur.com/D5DvLeg.png)
