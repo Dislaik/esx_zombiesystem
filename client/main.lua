@@ -9,7 +9,7 @@ end)
 
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(xPlayer)
-  PlayerData = xPlayer
+	PlayerData = xPlayer
 end)
 
 local Models = {
@@ -423,11 +423,12 @@ AddEventHandler("ZombieSync", function()
 				SetModelAsNoLongerNeeded(model)
 				DeleteEntity(entity)
 				table.remove(entitys,i)
-				Citizen.Trace("Zombie Eliminated from Water\n")
+				--Citizen.Trace("Zombie Eliminated from Water\n")
 			end
 		end
 	end
 end)
+
 
 Citizen.CreateThread(function()
     while true do
@@ -493,22 +494,22 @@ if Config.ZombieDropLoot then
 											Citizen.Wait(1)
 										end
 										TaskPlayAnim(PlayerPedId(), "random@domestic", "pickup_low", 8.0, -8, 2000, 2, 0, 0, 0, 0)
-											
-										randomChance = math.random(1, 100)
-										randomLoot = Config.WeaponLoot[math.random(1, #Config.WeaponLoot)]
-										randomItem = Config.ItemLoot[math.random(1, #Config.ItemLoot)]
 
 										Citizen.Wait(2000)
+										randomChance = math.random(1, 100)
+										randomWeapon = Config.WeaponLoot[math.random(1, #Config.WeaponLoot)]
+										randomItem = Config.ItemLoot[math.random(1, #Config.ItemLoot)]
+
 										if randomChance > 0 and randomChance < Config.ProbabilityWeaponLoot then
 											local randomAmmo = math.random(1, 30)
-											GiveWeaponToPed(PlayerPedId(), randomLoot, randomAmmo, true, false)
-											exports.pNotify:SendNotification({text = 'You found ' .. randomLoot, type = "success", timeout = 2500, layout = "centerRight", queue = "right"})
+											GiveWeaponToPed(PlayerPedId(), randomWeapon, randomAmmo, true, false)
+											ESX.ShowNotification('You found ' .. randomWeapon)
 										elseif randomChance >= Config.ProbabilityWeaponLoot and randomChance < Config.ProbabilityMoneyLoot then
 											TriggerServerEvent('esx_zombiesystem:moneyloot')
 										elseif randomChance >= Config.ProbabilityMoneyLoot and randomChance < Config.ProbabilityItemLoot then
 											TriggerServerEvent('esx_zombiesystem:itemloot', randomItem)
 										elseif randomChance >= Config.ProbabilityItemLoot and randomChance < 100 then
-											exports.pNotify:SendNotification({text = 'You not found nothing', type = "error", timeout = 2500, layout = "centerRight", queue = "right"})
+											ESX.ShowNotification('You not found nothing')
 										end
 										ClearPedSecondaryTask(GetPlayerPed(-1))
 										local model = GetEntityModel(entity)
