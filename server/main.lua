@@ -32,8 +32,12 @@ RegisterServerEvent('esx_zombiesystem:itemloot')
 AddEventHandler('esx_zombiesystem:itemloot', function(item)
     local xPlayer = ESX.GetPlayerFromId(source)
 	local random = math.random(1, 3)
-    xPlayer.addInventoryItem(item, random)
-    TriggerClientEvent("esx:showNotification", xPlayer.source, ('You found ~y~' .. random .. 'x ~b~' .. item))
+    if xPlayer.canCarryItem(item, random) then
+        xPlayer.addInventoryItem(item, random)
+        TriggerClientEvent("esx:showNotification", xPlayer.source, ('You found ~y~' .. random .. 'x ~b~' .. item))
+    else
+        xPlayer.showNotification('You cannot pickup that because your inventory is full!')
+    end
 end)
 
 entitys = {}
