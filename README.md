@@ -14,8 +14,5 @@ This is a zombie system, complemented with ESX
 3. Don't forget add ensure esx_zombiesystem in your server.cfg file
 4. Configure to your liking
 
-## Dependecy
-* [mythic_progbar](https://github.com/JayMontana36/mythic_progbar)
-
 ## Screenshots
 ![Image description](https://i.imgur.com/D5DvLeg.png)
