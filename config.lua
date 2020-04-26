@@ -26,24 +26,9 @@ Config.ItemLoot = {
 
 
 
-Config.ObjectDropLoot = true
+Config.ObjectDropLoot = true --false if you experience low performance of server
 Config.ObjectsLoot = {
-    'prop_box_ammo03a',
-    'prop_bin_03a',
-    'prop_bin_02a',
-    'prop_bin_01a',
-    'prop_bin_04a',
-    'prop_bin_05a',
-    'prop_bin_06a',
-    'prop_bin_07a',
-    'prop_bin_07b',
-    'prop_bin_07c',
-    'prop_bin_07d',
-    'prop_bin_08open',
-    'prop_cs_bin_02',
-    'prop_box_wood01a',
-    'prop_box_wood03a',
-    'prop_box_wood07a',
+    'prop_box_ammo03a'
 }
 
 Config.ProbabilityWeaponLootObject = 2 -- 2%
