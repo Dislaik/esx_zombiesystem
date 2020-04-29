@@ -373,9 +373,9 @@ AddEventHandler("ZombieSync", function()
 			while not HasAnimSetLoaded(walk) do
 				Citizen.Wait(1)
 			end
-			TaskGoToEntity(entity, GetPlayerPed(-1), -1, 0.0, 1.0, 1073741824, 0)
+			--TaskGoToEntity(entity, GetPlayerPed(-1), -1, 0.0, 1.0, 1073741824, 0)
 			SetPedMovementClipset(entity, walk, 1.0)
-			--TaskWanderStandard(entity, 1.0, 10)
+			TaskWanderStandard(entity, 1.0, 10)
 			SetCanAttackFriendly(entity, true, true)
 			SetPedCanEvasiveDive(entity, false)
 			SetPedRelationshipGroupHash(entity, GetHashKey("zombie"))
@@ -424,6 +424,22 @@ AddEventHandler("ZombieSync", function()
 				DeleteEntity(entity)
 				table.remove(entitys,i)
 				--Citizen.Trace("Zombie Eliminated from Water\n")
+			end
+		end
+	end
+end)
+
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(1000)
+		for i, entity in pairs(entitys) do
+			for j, player in pairs(players) do
+				local playerX, playerY, playerZ = table.unpack(GetEntityCoords(GetPlayerPed(player), true))
+				local distance = GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(player)), GetEntityCoords(entity), true)
+				if distance <= 25.0 then
+					--TaskGoStraightToCoord(entity, playerX, playerY, playerZ, 1.0, -1, 0,0)
+					TaskGoToEntity(entity, GetPlayerPed(player), -1, 0.0, 1.0, 1073741824, 0)
+				end
 			end
 		end
 	end
